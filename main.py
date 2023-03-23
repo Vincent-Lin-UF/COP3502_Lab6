@@ -14,6 +14,18 @@ def encode(): # Encodes the password
     
     return encPass
 
+def decode(encoded_password):
+    # Convert the encoded password to a list of integers
+    encoded_digits = [int(d) for d in encoded_password]
+    
+    # Shift each digit down by 3 numbers
+    password_digits = [(d - 3) % 10 for d in encoded_digits]
+    
+    # Convert the password digits back to a string
+    password = ''.join(str(d) for d in password_digits)
+    
+    return password
+
 def menu(): # Menu
     print("Menu\n-------------\n1. Encode\n2. Decode\n3. Quit\n")
 
@@ -27,9 +39,10 @@ def main():
             encPass = encode()
             print("Your password has been encoded and stored!\n")
         elif userInput == 2: # Decodes the password
-            print("decode goes here")
+            print(f"The encoded password is {encPass}, and the original password is {decode(encPass)}.\n")
         elif userInput == 3: # Exits the program
-            break
+            False
+            exit()
         else:
             print("Error: Input Valid Number")
         
